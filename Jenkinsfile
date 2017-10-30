@@ -15,12 +15,12 @@ node {
   stage('build') {
     sh 'mvn clean package'
   }
-  
+  	
   stage('deploy') {
-    def resourceGroup = '<myResourceGroup>' 
-    def webAppName = '<app_name>'
+    def resourceGroup = 'RG_DEV_PHP' 
+    def webAppName = 'TESTEWEBAPPJENKINS'
     // login Azure
-    withCredentials([azureServicePrincipal('<mySrvPrincipal>')]) {
+    withCredentials([azureServicePrincipal('azsrvprincipal')]) {
       sh '''
         az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
         az account set -s $AZURE_SUBSCRIPTION_ID
